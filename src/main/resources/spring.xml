@@ -11,7 +11,7 @@
 
     <bean id="app" class="com.epam.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="eventLogger"/>
+        <constructor-arg ref="cacheFileEventLogger"/>
     </bean>
 
     <bean id="event" class="com.epam.entity.Event" scope="prototype">
@@ -23,4 +23,13 @@
 
     <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 
+
+    <bean id="fileEventLogger" class="com.epam.logger.FileEventLogger" init-method="init">
+        <constructor-arg value="/home/dmitry/Lab1"/>
+    </bean>
+
+    <bean id="cacheFileEventLogger" class="com.epam.logger.CacheFileEventLogger" destroy-method="destroy">
+        <constructor-arg value="/home/dmitry/Lab1"/>
+        <constructor-arg value="3"/>
+    </bean>
 </beans>

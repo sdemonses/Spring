@@ -1,5 +1,6 @@
 package com.epam.entity;
 
+import javax.annotation.Generated;
 import java.text.DateFormat;
 import java.util.Date;
 

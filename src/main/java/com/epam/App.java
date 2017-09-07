@@ -1,8 +1,10 @@
 package com.epam;
 
 import com.epam.entity.Client;
+import com.epam.entity.Event;
 import com.epam.logger.EventLogger;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -22,15 +24,14 @@ public class App {
     }
 
     public static void main(String[] args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         App app = (App) ctx.getBean("app");
-
-        app.logEvent("Some event for user 1");
+        Event event = (Event) ctx.getBean("event");
+        app.logEvent(event);
+        ctx.close();
     }
 
-    public void logEvent(String msg) {
-        String message = msg.replaceAll(client.getId(), client.getFullName());
-        eventLogger.logEvent(message);
-
+    public void logEvent(Event event) {
+        eventLogger.logEvent(event);
     }
 }
